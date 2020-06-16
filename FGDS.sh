@@ -9,9 +9,9 @@
 version="0.035"								## Version Year.Day
 updatedate="May 18,2020"					## The date of the last update
 example_domain="megacorp.one" 				## Example domain
-sleeptime=6									## Delay between queries, in seconds
+sleeptime=12									## Delay between queries, in seconds
 domain=$1 									## Get the domain
-browser='Mozilla/5.0_(MSIE;_Windows_11)'	## Browser information for curl
+browser='Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/534.3 (KHTML, like Gecko) Chrome/6.0.458.0 Safari/534.3'	## Browser information for curl
 gsite="site:$domain" 						## Google Site
 
 ## Login pages
@@ -91,7 +91,7 @@ function Query {
 		result="";
 		for start in `seq 0 10 40`; ##### Last number - quantity of possible answers
 			do
-				query=$(echo; curl -sS -A $browser "https://www.google.com/search?q=$gsite%20$1&start=$start&client=firefox-b-e")
+				query=$(echo; curl -sS -A "$browser" "https://www.google.com/search?q=$gsite%20$1&start=$start&client=firefox-b-e")
 
 				checkban=$(echo $query | grep -io "https://www.google.com/sorry/index")
 				if [ "$checkban" == "https://www.google.com/sorry/index" ]
